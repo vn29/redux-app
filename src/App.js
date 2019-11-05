@@ -7,6 +7,7 @@ import logo from './logo.svg';
 class App extends Component {
 //this performs the simple action
   SA = (event) => {
+    //call the dispatch mapped function
     this.props.A();
   }
   render() {
@@ -20,26 +21,20 @@ class App extends Component {
           To get started, edit <code> src/App.js</code> and save to reload
         </p>
         <button onClick={this.SA}>Test redux action</button>
-        <pre>
-          {
-            JSON.stringify(this.props)
-          }
-        </pre>
+        <pre>{JSON.stringify(this.props)}</pre>
       </div>
     );
   }
 }
 
-//this is where the magic happens. I am connecting the state to props
 export default connect(
-  state => 
-    ({
-      ...state
-    }),
-  dispatch => 
-    ({
-      A() {
-        dispatch(simpleAction())
-      }
-    })
+  //map state to props
+  state => ({...state}),
+  //map dispatch to props
+  dispatch => ({ 
+    A() { 
+      dispatch(simpleAction()) 
+    } 
+  })
+  //connect it to App
   )(App);
