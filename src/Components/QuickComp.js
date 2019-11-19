@@ -31,11 +31,7 @@ export const SelectComp = (
     </select>
     )
   }
-
-
-  return(
-      genOptions()
-  )
+  return(genOptions())
 }
 
 
@@ -50,12 +46,14 @@ export const Qfx = ({props}) => {
   let ft = 12.*inch
   let lbf = 1.
   let kip = 1000.*lbf
-  let units = [
-    "lbf-in",
-    "lbf-ft",
-    "kip-in",
-    "kip-ft"
-  ]
+  let units_obj = {
+    "lbf-in": lbf*inch,
+    "lbf-ft": lbf*ft,
+    "kip-in": kip*inch,
+    "kip-ft": kip*ft,
+  }
+
+  let units = Object.keys(units_obj)
 
   let selStyle = {
     color:"red"
@@ -63,39 +61,9 @@ export const Qfx = ({props}) => {
 
   const handleOnChange = (e) => {
     
-    switch (_svalue1.value) {
-      case 'lbf-in':
-        factor1 = lbf*inch
-        break
-      case 'lbf-ft':
-        factor1 = lbf*ft
-        break
-      case 'kip-in':
-        factor1 = kip*inch
-        break
-      case 'kip-ft':
-        factor1 = kip*ft
-        break
-      default:
-        factor1 = lbf*inch
-    }
+    factor1 = units_obj[_svalue1.value]
+    factor2 = units_obj[_svalue2.value]
 
-    switch (_svalue2.value) {
-      case 'lbf-in':
-        factor2 = lbf*inch
-        break
-      case 'lbf-ft':
-        factor2 = lbf*ft
-        break
-      case 'kip-in':
-        factor2 = kip*inch
-        break
-      case 'kip-ft':
-        factor2 = kip*ft
-        break
-      default:
-        factor2 = lbf*inch
-    }
     _value2.value = _value1.value*factor1*(factor2)**(-1)
   }
   return(
