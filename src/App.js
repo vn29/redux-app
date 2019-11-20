@@ -4,6 +4,59 @@ import PropTypes from 'prop-types'
 import {PlaceHolder} from './Containers.js'
 import {connect} from 'react-redux';
 import * as acts from './actions/simpleAction';
+import {HashRouter, Route, Link} from 'react-router-dom'
+import * as THREE from "three"
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import {ThreeWindow} from './ThreeComponent.js'
+
+const Home = () => {
+    return(
+        <section className="Home">
+            <h1>[Company Website]</h1>
+            <PlaceHolder/>
+            <nav>
+                <Link to="about">[About]</Link>
+                <Link to="events">[Events]</Link>
+                <Link to="products">[Products]</Link>
+                <Link to="contact">[Contact Us]</Link>
+            </nav>
+        </section>
+
+    )
+}
+
+const About = () => {
+    return(
+        <section className="About">
+            <h1>[About]</h1>
+        </section>
+
+    )
+}
+const Events = () => {
+    return(
+        <section className="Events">
+            <h1>[Events]</h1>
+        </section>
+
+    )
+}
+const Products = () => {
+    return(
+        <section className="Products">
+            <h1>[Products]</h1>
+        </section>
+
+    )
+}
+const Contacts = () => {
+    return(
+        <section className="Contacts">
+            <h1>[Contacts]</h1>
+        </section>
+
+    )
+}
 
 const Mycomp = ({
     clicked = f => f,
@@ -19,12 +72,30 @@ const Mycomp = ({
     )
 }
 
-const App = ({
-    state = {},
-    daily = f => f
-}) => <div className="App">
-    <PlaceHolder></PlaceHolder>
-</div>
+class App extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            x: this.props.x
+        }
+    }
+
+
+    render() {
+        return(
+            <HashRouter>
+            <div className="main">
+                <ThreeWindow/>
+                <Route exact path="/" component={Home}/>
+                <Route path="/about" component={About}/>
+                <Route path="/events" component={Events}/>
+                <Route path="/products" component={Products}/>
+                <Route path="/contacts" component={Contacts}/>
+            </div>
+        </HashRouter>
+        )
+    }
+}
 
 export const AppMain = connect(
 // map state to props map state to props so it can be accessed by the component

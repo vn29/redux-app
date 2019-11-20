@@ -133,7 +133,7 @@ export class PbSVGInteractiveRectangle extends Component {
                 )
             }}
             >
-                <rect x="120" width="300" height="100" fill="blue" opacity='50%'/>
+                <rect x="120" width="300" height="100" fill="blue" opacity='50%' tabindex="1"/>
             </g>
         )
     }
